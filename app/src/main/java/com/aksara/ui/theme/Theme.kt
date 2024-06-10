@@ -1,4 +1,4 @@
-package com.dicoding.aksara.ui.theme
+package com.aksara.ui.theme
 
 import android.app.Activity
 import android.os.Build

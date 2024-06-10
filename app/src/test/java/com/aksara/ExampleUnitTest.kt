@@ -1,4 +1,4 @@
-package com.dicoding.aksara
+package com.aksara
 
 import org.junit.Test
 

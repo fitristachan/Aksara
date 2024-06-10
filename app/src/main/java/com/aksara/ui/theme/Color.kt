@@ -1,4 +1,4 @@
-package com.dicoding.aksara.ui.theme
+package com.aksara.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

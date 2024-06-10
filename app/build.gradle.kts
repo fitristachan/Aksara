@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.dicoding.aksara"
+    namespace = "com.aksara"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.dicoding.aksara"
+        applicationId = "com.aksara"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

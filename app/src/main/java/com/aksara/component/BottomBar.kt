@@ -1,4 +1,4 @@
-package com.dicoding.aksara.component
+package com.aksara.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -15,7 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.dicoding.aksara.R
+import com.aksara.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
