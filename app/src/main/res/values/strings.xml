@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">Aksara</string>
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Beranda</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_nilai">Nilai</string>
     <string name="menu_qna">QnA</string>
-    <string name="menu_history">History</string>
+    <string name="menu_history">Riwayat</string>
+    <string name="result_title">Hasil Pindai Aksaramu</string>
+    <string name="article_title">Yuk, Sinau!</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="back_button">Tombol Kembali</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="permission_request">Izin Akses</string>
+    <string name="camera_permission">Untuk menggunakan fitur ini, Anda perlu memberikan izin akses kamera.</string>
+    <string name="camera_access_rejected">Anda tidak memberi izin untuk mengakses kamera.</string>
+    <string name="open_settings">Buka Pengaturan</string>
+    <string name="lighting_instruction">Pastikan pencahayaan cukup terang</string>
+    <string name="scan_instruction">Scan aksara jawa dalam kotak</string>
+    <string name="open_gallery">Buka Galeri</string>
 </resources>
