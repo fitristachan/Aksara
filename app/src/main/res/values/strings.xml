@@ -17,4 +17,6 @@
     <string name="lighting_instruction">Pastikan pencahayaan cukup terang</string>
     <string name="scan_instruction">Scan aksara jawa dalam kotak</string>
     <string name="open_gallery">Buka Galeri</string>
+    <string name="scan_from_home_desc">Aksara jawa apa yang ingin kamu scan hari ini?</string>
+    <string name="scan_from_home_btn">Scan Aksara Baru</string>
 </resources>

@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -39,6 +40,7 @@ import com.aksara.ui.theme.AksaraTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             AksaraTheme {
                 // A surface container using the 'background' color from the theme
@@ -71,16 +73,14 @@ fun AksaraApp(
 
             ) {
                 BottomBar(
-                    modifier = Modifier.padding(horizontal = 4.dp),
+                    modifier = Modifier.padding(4.dp),
                     navController)
             }
         },
         topBar = {
-            if (currentRoute != AksaraScreen.Home.route
-                && currentRoute != AksaraScreen.Scan.route
-                && currentRoute != AksaraScreen.Qna.route
-                && currentRoute != AksaraScreen.Score.route
-                && currentRoute != AksaraScreen.History.route
+            if (currentRoute == AksaraScreen.Result.route
+                && currentRoute == AksaraScreen.Scan.route
+                && currentRoute == AksaraScreen.Article.route
             ) {
                 var text = ""
                 when (currentRoute) {
@@ -108,6 +108,10 @@ fun AksaraApp(
 //                    navigateToHistory = {
 //                        navController.navigate(AksaraScreen.History.route)
 //                    },
+                    navigateToScan = {
+                        val scanRoute = AksaraScreen.Scan.route
+                        navController.navigate(scanRoute)
+                    },
                     navigateToDetail = {
                         val detailRoute = AksaraScreen.Result.createRoute(it)
                         navController.navigate(detailRoute)
@@ -149,11 +153,10 @@ fun AksaraApp(
                 val historyId =
                     it.arguments?.getString("historyId") ?: ""
                 ResultScreen(
-//                    modifier,
-//                    historyId = historyId,
-//                    navigateBack = {
-//                        navController.navigateUp()
-//                    },
+                    historyId = historyId,
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
                 )
             }
             composable(

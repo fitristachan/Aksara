@@ -21,17 +21,17 @@
         tools:targetApi="31" >
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_splash_screen"
-            android:theme="@style/Theme.Aksara" />
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AksaraSplash" >
+        </activity>
         <activity
             android:name=".ui.SplashScreenActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Aksara" >
+            android:theme="@style/Theme.AksaraSplash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -35,7 +35,6 @@ fun ScanCard(
     modifier: Modifier,
     scanResult: String,
     scanPhoto: Uri,
-    color: Color,
     onClick: () -> Unit
 ) {
     Card(

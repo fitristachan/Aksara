@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -30,14 +31,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -65,7 +67,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-permissions:0.18.0")
 
     //splashscreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
     //camera
     implementation("androidx.camera:camera-camera2:1.2.1")
@@ -86,6 +88,11 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.3.1")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+
+    //room
+    implementation("androidx.room:room-ktx:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

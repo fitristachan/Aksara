@@ -42,7 +42,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -61,7 +60,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.aksara.R
+import com.aksara.model.processImageAndPredict
 import com.aksara.ui.component.CameraPreview
 import com.aksara.ui.component.Loading
 import com.aksara.ui.component.dashedBorder
@@ -70,6 +71,9 @@ import com.aksara.ui.component.getCameraProvider
 import com.aksara.utils.Permission
 import com.aksara.utils.createCustomTempFile
 import com.aksara.utils.deleteTempFile
+import com.aksara.utils.saveToGallery
+
+val imageFileInGallery = mutableStateOf("")
 
 @Composable
 fun ScanScreen(
@@ -104,20 +108,17 @@ fun ScanScreen(
     { uri: Uri? ->
         if (uri != null) {
             isLoading = true
-//            processAndFetch(
-//                imageUri = uri,
-//                context = context,
-//                historyViewModel = historyViewModel,
-//                onWait = {
-//                    isLoading = true
-//                },
-//                navigateToDetail = { it: Int? ->
-//                    if (it != null){
-//                        isLoading = false
-//                        navigateToDetail(it.toString())
-//                    }
-//                }
-//            )
+            processImageAndPredict(
+                uri = uri,
+                context = context,
+                callback = { it: String? ->
+                    if (it != null) {
+                        isLoading = false
+                        navigateToDetail(it)
+                        imageFileInGallery.value = uri.toString()
+                    }
+                }
+            )
         } else {
             isLoading = false
             Log.d("Photo Picker", "No media selected")
@@ -165,7 +166,7 @@ fun ScanScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .padding (bottom = 80.dp)
+                    .padding(bottom = 80.dp)
                     .align(Alignment.Center)
                     .fillMaxWidth()
             ) {
@@ -283,18 +284,21 @@ fun ScanScreen(
                                 object : ImageCapture.OnImageSavedCallback {
                                     override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                                         imageUri = output.savedUri
-//                                        processAndFetchCamera(
-//                                            imageUri = imageUri,
-//                                            context = context,
-//                                            historyViewModel = historyViewModel,
-//                                            onWait = {
-//                                                isLoading = true
-//                                            },
-//                                            navigateToDetail = {
-//                                                deleteTempFile(photoFile)
-//                                                navigateToDetail(it.toString())
-//                                            }
-//                                        )
+                                        processImageAndPredict(
+                                            uri = imageUri,
+                                            context = context,
+                                            callback = { it: String? ->
+                                                if (it != null) {
+                                                    saveToGallery(context, imageUri) { file ->
+                                                        imageFileInGallery.value =
+                                                            file!!.toUri().toString()
+                                                    }
+                                                    isLoading = false
+                                                    deleteTempFile(photoFile)
+                                                    navigateToDetail(it)
+                                                }
+                                            }
+                                        )
                                     }
 
 
@@ -341,10 +345,9 @@ fun ScanScreen(
             }
         }
         if (isLoading) {
-            Box(modifier = Modifier.background(MaterialTheme.colorScheme.onBackground)){
+            Box(modifier = Modifier.background(MaterialTheme.colorScheme.onBackground)) {
                 Loading()
             }
-
         }
     }
 }
