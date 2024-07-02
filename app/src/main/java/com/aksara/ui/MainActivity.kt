@@ -78,9 +78,11 @@ fun AksaraApp(
             }
         },
         topBar = {
-            if (currentRoute == AksaraScreen.Result.route
-                && currentRoute == AksaraScreen.Scan.route
-                && currentRoute == AksaraScreen.Article.route
+            if (currentRoute != AksaraScreen.Home.route
+                && currentRoute != AksaraScreen.Scan.route
+                && currentRoute != AksaraScreen.Score.route
+                && currentRoute != AksaraScreen.Qna.route
+                && currentRoute != AksaraScreen.History.route
             ) {
                 var text = ""
                 when (currentRoute) {
@@ -153,10 +155,10 @@ fun AksaraApp(
                 val historyId =
                     it.arguments?.getString("historyId") ?: ""
                 ResultScreen(
-                    historyId = historyId,
-                    navigateBack = {
-                        navController.navigateUp()
-                    },
+                    historyId = historyId
+//                    navigateBack = {
+//                        navController.navigateUp()
+//                    },
                 )
             }
             composable(

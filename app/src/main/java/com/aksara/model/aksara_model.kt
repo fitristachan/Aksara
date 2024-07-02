@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.widget.Toast
 import com.aksara.ml.ModelCheckpointBlock4cProjectConvB
+import com.aksara.utils.saveBitmap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
@@ -42,7 +43,9 @@ fun processImageAndPredict(context: Context, uri: Uri, callback: (String) -> Uni
     if (imageBitmap != null) {
         val downsampledBitmap = Bitmap.createScaledBitmap(imageBitmap, 300, 300, true)
         val grayBitmap = convertToGrayscale(downsampledBitmap)
-        val binaryBitmap = applyBinaryThreshold(grayBitmap, 170)
+        val binaryBitmap = applyBinaryThreshold(grayBitmap, 120)
+
+        saveBitmap(context, binaryBitmap, "processed_image.png")
 
         val width = binaryBitmap.width
         val height = binaryBitmap.height
@@ -136,3 +139,5 @@ fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
         null
     }
 }
+
+

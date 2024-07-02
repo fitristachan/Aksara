@@ -64,6 +64,20 @@ fun saveToGallery(context: Context, imageUri: Uri, callback: (File?) -> Unit) {
     }
 }
 
+fun saveBitmap(context: Context, bitmap: Bitmap, fileName: String) {
+    val relativePath = Environment.DIRECTORY_PICTURES + File.separator + "Processing Result"
+    val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Processing Result")
+    if (!directory.exists()) {
+        directory.mkdirs()
+    }
+
+    val file = File(directory, fileName)
+    val out = FileOutputStream(file)
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+    out.flush()
+    out.close()
+}
+
 
 fun uriToFile(imageUri: Uri, context: Context): File {
     val myFile = createCustomTempFile(context)

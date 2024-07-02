@@ -44,7 +44,7 @@ fun TopBar(
         }
         Text(
             text = title,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(horizontal = 8.dp)
         )
     }

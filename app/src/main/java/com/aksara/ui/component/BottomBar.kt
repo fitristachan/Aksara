@@ -44,7 +44,7 @@ fun BottomBar(
 ) {
     NavigationBar(
         modifier = Modifier
-            .padding(horizontal = 2.dp)
+            .padding(start = 2.dp, end = 2.dp, bottom = 0.dp, top = 4.dp)
             .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
             .fillMaxWidth()
             .shadow(2.dp),
@@ -113,7 +113,7 @@ fun BottomBar(
         }
     }
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {

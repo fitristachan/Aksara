@@ -9,6 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import com.dietinapp.article.readArticleFromJson
+
 //import com.aksara.article.readArticleFromJson
 
 @Composable
@@ -16,8 +18,8 @@ fun ArticleScreen(
     articleId: Int,
 ) {
     val context = LocalContext.current
-//    val articleJson = remember { readArticleFromJson(context) }
-//    val articleLink = articleJson[articleId].link.toString()
+    val articleJson = remember { readArticleFromJson(context) }
+    val articleLink = articleJson[articleId].link.toString()
 
     Column {
         AndroidView(
@@ -32,7 +34,7 @@ fun ArticleScreen(
                 }
             },
             update = { webView ->
-//                webView.loadUrl(articleLink)
+                webView.loadUrl(articleLink)
             },
             modifier = Modifier
                 .fillMaxSize()

@@ -49,7 +49,7 @@ fun ArticleCard(
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 8.dp),
+                .padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -63,7 +63,7 @@ fun ArticleCard(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Start,
                     maxLines = 4
@@ -71,12 +71,13 @@ fun ArticleCard(
 
                 Spacer(
                     modifier = Modifier
-                        .widthIn(min = 3.dp)
+                        .size(10.dp)
                 )
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
+
                     Text(
                         text = writer,
                         style = MaterialTheme.typography.labelSmall,
@@ -99,7 +100,7 @@ fun ArticleCard(
 
                     Spacer(
                         modifier = Modifier
-                            .size(8.dp)
+                            .widthIn(min = 6.dp)
                     )
 
                     Text(
