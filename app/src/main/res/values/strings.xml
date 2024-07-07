@@ -19,4 +19,10 @@
     <string name="open_gallery">Buka Galeri</string>
     <string name="scan_from_home_desc">Aksara jawa apa yang ingin kamu scan hari ini?</string>
     <string name="scan_from_home_btn">Scan Aksara Baru</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_today">Hari Ini</string>
+    <string name="filter_month">Bulan Ini</string>
+    <string name="filter_year">Tahun Ini</string>
+    <string name="history_title">Riwayat Aksaramu</string>
+    <string name="empty_contents">Kamu belum pernah scan aksara, nih! Scan dulu, yuk!</string>
 </resources>

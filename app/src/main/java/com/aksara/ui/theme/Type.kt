@@ -32,6 +32,12 @@ val Typography = Typography(
         fontSize = 16.sp
     ),
 
+    titleSmall= TextStyle(
+        fontFamily = InriasansRegular,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp
+    ),
+
     labelLarge = TextStyle(
         fontFamily = InriasansRegular,
         fontWeight = FontWeight.Normal,

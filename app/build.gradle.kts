@@ -2,11 +2,14 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version "1.7.0"
 }
 
 android {
     namespace = "com.aksara"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.aksara"
@@ -93,6 +96,25 @@ dependencies {
     //room
     implementation("androidx.room:room-ktx:2.5.2")
     kapt("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-paging:2.5.2")
+
+    // Dagger
+    implementation("com.google.dagger:hilt-android:2.48")
+    ksp("com.google.dagger:dagger-compiler:2.48") // Dagger compiler
+    ksp("com.google.dagger:hilt-compiler:2.48")   // Hilt compiler
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-beta01")
+
+    //LifeCycle SavedStates
+
+    val lifecycle_version = "2.6.2"
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+
+    //Serialization :
+    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

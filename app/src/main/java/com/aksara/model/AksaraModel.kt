@@ -45,7 +45,7 @@ fun processImageAndPredict(context: Context, uri: Uri, callback: (String) -> Uni
         val grayBitmap = convertToGrayscale(downsampledBitmap)
         val binaryBitmap = applyBinaryThreshold(grayBitmap, 120)
 
-        saveBitmap(context, binaryBitmap, "processed_image.png")
+//        saveBitmap(context, binaryBitmap, "processed_image.png")
 
         val width = binaryBitmap.width
         val height = binaryBitmap.height

@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -17,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -25,6 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aksara.R
+import com.aksara.room.ScanViewModel
 import com.aksara.ui.component.BottomBar
 import com.aksara.ui.component.TopBar
 import com.aksara.ui.navigation.AksaraScreen
@@ -36,7 +37,9 @@ import com.aksara.ui.screen.ResultScreen
 import com.aksara.ui.screen.ScanScreen
 import com.aksara.ui.screen.ScoreScreen
 import com.aksara.ui.theme.AksaraTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +58,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AksaraApp(
     navController: NavHostController = rememberNavController()
@@ -132,7 +134,8 @@ fun AksaraApp(
                     navigateToDetail = {
                         val route = AksaraScreen.Result.createRoute(it)
                         navController.navigate(route)
-                    }
+                    },
+                    scanViewModel = hiltViewModel<ScanViewModel>()
                 )
             }
             composable(AksaraScreen.Score.route) {
@@ -140,25 +143,24 @@ fun AksaraApp(
             }
             composable(AksaraScreen.History.route) {
                 HistoryScreen(
-//                    navigateToDetail = {
-//                        val route = AksaraScreen.Result.createRoute(it)
-//                        navController.navigate(route)
-//                    },
+                    navigateToDetail = {
+                        val route = AksaraScreen.Result.createRoute(it)
+                        navController.navigate(route)
+                    },
+                    scanViewModel = hiltViewModel<ScanViewModel>()
                 )
             }
             composable(
                 route = AksaraScreen.Result.route,
                 arguments = listOf(
-                    navArgument("historyId") { type = NavType.StringType }
+                    navArgument("scanId") { type = NavType.StringType }
                 )
             ) {
-                val historyId =
-                    it.arguments?.getString("historyId") ?: ""
+                val scanId =
+                    it.arguments?.getString("scanId") ?: ""
                 ResultScreen(
-                    historyId = historyId
-//                    navigateBack = {
-//                        navController.navigateUp()
-//                    },
+                    scanId = scanId,
+                    scanViewModel = hiltViewModel<ScanViewModel>()
                 )
             }
             composable(
