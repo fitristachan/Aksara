@@ -18,7 +18,7 @@ interface ScanDao {
     fun getScanByScanId(scanId: Int): Flow<ScanEntity?>
 
     // Select all data
-    @Query("SELECT * FROM scans")
+    @Query("SELECT * FROM scans ORDER BY scanId DESC")
     fun getAllScans(): Flow<List<ScanEntity>>
 
      //Select ID of the data with the newest ID (the most recently inserted data)

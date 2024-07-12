@@ -25,4 +25,5 @@
     <string name="filter_year">Tahun Ini</string>
     <string name="history_title">Riwayat Aksaramu</string>
     <string name="empty_contents">Kamu belum pernah scan aksara, nih! Scan dulu, yuk!</string>
+    <string name="score_association_result">Score Association Result</string>
 </resources>

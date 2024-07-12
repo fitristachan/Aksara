@@ -7,10 +7,11 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -46,8 +47,13 @@ fun saveToGallery(context: Context, imageUri: Uri, callback: (File?) -> Unit) {
 
     insertedUri?.let { newUri ->
         contentResolver.openInputStream(imageUri)?.use { inputStream ->
+            // Convert the InputStream to a Bitmap
+            val originalBitmap = BitmapFactory.decodeStream(inputStream)
+            val scaledBitmap = scaleBitmap(originalBitmap, 0.3f) // Scale the bitmap by 4x
+            val croppedBitmap = cropBitmapToCenter(scaledBitmap, 300, 300)
+
             contentResolver.openOutputStream(newUri)?.use { outputStream ->
-                inputStream.copyTo(outputStream)
+                croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
                 // Retrieve the file corresponding to the URI after insertion
                 val projection = arrayOf(MediaStore.Images.Media.DATA)
                 val cursor = context.contentResolver.query(newUri, projection, null, null, null)
@@ -64,20 +70,17 @@ fun saveToGallery(context: Context, imageUri: Uri, callback: (File?) -> Unit) {
     }
 }
 
-fun saveBitmap(context: Context, bitmap: Bitmap, fileName: String) {
-    val relativePath = Environment.DIRECTORY_PICTURES + File.separator + "Processing Result"
-    val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Processing Result")
-    if (!directory.exists()) {
-        directory.mkdirs()
-    }
-
-    val file = File(directory, fileName)
-    val out = FileOutputStream(file)
-    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-    out.flush()
-    out.close()
+fun scaleBitmap(bitmap: Bitmap, scaleFactor: Float): Bitmap {
+    val width = (bitmap.width * scaleFactor).toInt()
+    val height = (bitmap.height * scaleFactor).toInt()
+    return Bitmap.createScaledBitmap(bitmap, width, height, true)
 }
 
+fun cropBitmapToCenter(bitmap: Bitmap, width: Int, height: Int): Bitmap {
+    val x = (bitmap.width - width) / 2
+    val y = (bitmap.height - height) / 2
+    return Bitmap.createBitmap(bitmap, x, y, width, height)
+}
 
 fun uriToFile(imageUri: Uri, context: Context): File {
     val myFile = createCustomTempFile(context)
@@ -116,5 +119,37 @@ fun deleteTempFile(file: File): Boolean {
         }
     } catch (e: Exception) {
         false
+    }
+}
+
+fun saveBitmapToGallery(context: Context, bitmap: Bitmap, displayName: String) {
+
+    val relativePath = Environment.DIRECTORY_PICTURES + File.separator + "Aksara"
+    val directory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Aksara")
+    if (!directory.exists()) {
+        directory.mkdirs()
+    }
+
+    val contentValues = ContentValues().apply {
+        put(MediaStore.Images.Media.DISPLAY_NAME, "$displayName.jpg")
+        put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        put(MediaStore.Images.Media.RELATIVE_PATH, relativePath)
+    }
+
+    val contentResolver = context.contentResolver
+    val insertedUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+    insertedUri?.let { newUri ->
+        var outputStream: OutputStream? = null
+        try {
+            outputStream = contentResolver.openOutputStream(newUri)
+            if (outputStream != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            outputStream?.close()
+        }
     }
 }

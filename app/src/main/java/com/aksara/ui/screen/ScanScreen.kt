@@ -48,7 +48,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,7 +61,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aksara.R
 import com.aksara.model.processImageAndPredict
 import com.aksara.room.ScanEntity
@@ -76,9 +74,6 @@ import com.aksara.utils.Permission
 import com.aksara.utils.createCustomTempFile
 import com.aksara.utils.deleteTempFile
 import com.aksara.utils.saveToGallery
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -126,7 +121,6 @@ fun ScanScreen(
                 context = context,
                 callback = { it: String? ->
                     if (it != null) {
-                        isLoading = false
                         imageFileInGallery.value = uri.toString()
                         scanViewModel.addScan(
                             ScanEntity(
@@ -135,6 +129,7 @@ fun ScanScreen(
                                 scanDate = timeStamp
                             )
                         ) { newScanId ->
+                            isLoading = false
                             navigateToDetail(newScanId.toString())
                         }
                     }
@@ -314,7 +309,6 @@ fun ScanScreen(
                                                         imageFileInGallery.value =
                                                             file!!.toUri().toString()
                                                     }
-                                                    isLoading = false
                                                     deleteTempFile(photoFile)
 
                                                     scanViewModel.addScan(
@@ -324,6 +318,7 @@ fun ScanScreen(
                                                             scanDate = timeStamp
                                                         )
                                                     ) { newScanId ->
+                                                        isLoading = false
                                                         navigateToDetail(newScanId.toString())
 
                                                     }

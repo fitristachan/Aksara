@@ -20,6 +20,11 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp
     ),
+    bodyMedium = TextStyle(
+        fontFamily = InriasansRegular,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
     titleLarge = TextStyle(
         fontFamily = InriasansRegular,
         fontWeight = FontWeight.Bold,
