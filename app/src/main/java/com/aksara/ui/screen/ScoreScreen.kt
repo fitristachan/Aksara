@@ -2,6 +2,7 @@ package com.aksara.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,25 +33,25 @@ fun ScoreScreen(
         modifier = modifier.padding(vertical = 16.dp, horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        //imageresult
         Image(
             modifier = modifier
                 .padding(horizontal = 0.dp, vertical = 16.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(MaterialTheme.colorScheme.secondary)
+                .border(2.dp, MaterialTheme.colorScheme.secondary, RoundedCornerShape(12.dp))
                 .width(290.dp)
-                .height(161.dp),
-            painter = painterResource(id = R.drawable.wayang),
+                .height(215.dp),
+            painter = painterResource(id = R.drawable.score_result),
             contentDescription = stringResource(
                 R.string.score_association_result
-            )
+            ),
+            contentScale = ContentScale.Crop
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn {
             items(rulesItems, key = { it.id }) { item ->
-                RulesCard(item.text)
+                RulesCard(item.text, item.id)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
