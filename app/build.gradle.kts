@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -22,6 +24,14 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val localProperties = project.rootProject.file("local.properties")
+        val properties = Properties().apply {
+            load(localProperties.inputStream())
+        }
+
+        val baseUrl = properties.getProperty("BASE_URL")
+        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
     }
 
     buildTypes {
@@ -43,6 +53,7 @@ android {
     buildFeatures {
         compose = true
         mlModelBinding = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -92,6 +103,14 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("androidx.exifinterface:exifinterface:1.3.6")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+
 
     //room
     implementation("androidx.room:room-ktx:2.5.2")

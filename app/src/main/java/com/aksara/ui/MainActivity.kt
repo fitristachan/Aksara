@@ -36,6 +36,7 @@ import com.aksara.ui.screen.QnaScreen
 import com.aksara.ui.screen.ResultScreen
 import com.aksara.ui.screen.ScanScreen
 import com.aksara.ui.screen.ScoreScreen
+import com.aksara.ui.screen.SelectContextScreen
 import com.aksara.ui.theme.AksaraTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -72,6 +73,7 @@ fun AksaraApp(
             if (currentRoute != AksaraScreen.Result.route
                 && currentRoute != AksaraScreen.Scan.route
                 && currentRoute != AksaraScreen.Article.route
+                && currentRoute != AksaraScreen.Qna.route
 
             ) {
                 BottomBar(
@@ -83,13 +85,16 @@ fun AksaraApp(
             if (currentRoute != AksaraScreen.Home.route
                 && currentRoute != AksaraScreen.Scan.route
                 && currentRoute != AksaraScreen.Score.route
-                && currentRoute != AksaraScreen.Qna.route
+                && currentRoute != AksaraScreen.SelectContext.route
                 && currentRoute != AksaraScreen.History.route
             ) {
                 var text = ""
                 when (currentRoute) {
                     AksaraScreen.Result.route -> {
                         text = stringResource(R.string.result_title)
+                    }
+                    AksaraScreen.Qna.route -> {
+                        text = stringResource(R.string.qna_title)
                     }
                     AksaraScreen.Article.route -> {
                         text = stringResource(R.string.article_title)
@@ -126,9 +131,24 @@ fun AksaraApp(
                     }
                 )
             }
-            composable(AksaraScreen.Qna.route) {
-                QnaScreen()
+            composable(AksaraScreen.SelectContext.route) {
+                SelectContextScreen()
             }
+
+            composable(
+                route = AksaraScreen.Qna.route,
+                arguments = listOf(
+                    navArgument("contextId") { type = NavType.IntType }
+                )
+            ) {
+                val contextId =
+                    it.arguments?.getInt("scanId") ?: 0
+                QnaScreen(
+                    contextId = contextId,
+//                    scanViewModel = hiltViewModel<ScanViewModel>()
+                )
+            }
+
             composable(AksaraScreen.Scan.route) {
                 ScanScreen(
                     navigateToDetail = {
