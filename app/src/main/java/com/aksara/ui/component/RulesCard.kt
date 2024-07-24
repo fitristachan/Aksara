@@ -28,11 +28,10 @@ fun RulesCard(
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.background),
         modifier = Modifier
             .fillMaxSize()
-            .clickable { onClick() }
+            .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
+            .clickable { if (!expanded) expanded = true else onClick() },
     ) {
         Row(
-            modifier = Modifier
-                .border(2.dp, Color.Black, RoundedCornerShape(8.dp)),
             verticalAlignment = if (!expanded) Alignment.CenterVertically else Alignment.Top
         ) {
             Column(

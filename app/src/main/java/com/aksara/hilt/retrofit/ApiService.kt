@@ -9,5 +9,5 @@ interface ApiService {
     suspend fun getAnswer(
         @Query("context") context: String,
         @Query("question") question: String
-    ): Flow<QnaResponse>
+    ): QnaResponse
 }

@@ -63,7 +63,7 @@ fun BottomBar(
             BottomNavItem(
                 title = stringResource(R.string.menu_qna),
                 icon = ImageVector.vectorResource(R.drawable.qna_icon),
-                aksaraScreen = AksaraScreen.Qna
+                aksaraScreen = AksaraScreen.SelectContext
             ),
             BottomNavItem(
                 title = stringResource(R.string.menu_scan),

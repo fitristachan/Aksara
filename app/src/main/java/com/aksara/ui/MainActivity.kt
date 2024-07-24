@@ -148,7 +148,7 @@ fun AksaraApp(
                 )
             ) {
                 val contextId =
-                    it.arguments?.getInt("scanId") ?: 0
+                    it.arguments?.getInt("contextId") ?: 0
                 QnaScreen(
                     contextId = contextId,
                     qnaViewModel = hiltViewModel<QnaViewModel>()

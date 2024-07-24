@@ -1,6 +1,10 @@
 package com.aksara.hilt.retrofit
 
 import com.google.gson.Gson
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +40,7 @@ class QnaRepositoryImpl @Inject constructor(
             _errorMessage.tryEmit("")
             _qnaResponseResult.tryEmit(null)
             try {
-                apiService.getAnswer(context = context, question = question).collect{
+                apiService.getAnswer(context = context, question = question).let{
                     _isLoading.tryEmit(false)
                     _qnaResponseResult.tryEmit(it)
                 }
@@ -63,4 +67,14 @@ private fun parseError(exception: HttpException): String {
     } catch (e: Exception) {
         "Unknown error"
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class RepositoryModule {
+
+    @Binds
+    abstract fun bindQnaRepository(
+        qnaRepositoryImpl: QnaRepositoryImpl
+    ): QnaRepository
 }

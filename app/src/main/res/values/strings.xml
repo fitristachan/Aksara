@@ -27,4 +27,10 @@
     <string name="empty_contents">Kamu belum pernah scan aksara, nih! Scan dulu, yuk!</string>
     <string name="score_association_result">Score Association Result</string>
     <string name="qna_title">Tanya Jawab</string>
+    <string name="choose_context_title">Pilih Materi</string>
+    <string name="choose_context_desc">Sebelum bertanya, kita pilih materinya dulu, yuk!</string>
+    <string name="question_empty_message">Belum ada pertanyaan</string>
+    <string name="question_example">Contoh Pertanyaan</string>
+    <string name="question_textfield">Tuliskan Pertanyaan Kamu Disini</string>
+    <string name="question_result">Jawaban Pertanyaan Kamu</string>
 </resources>
