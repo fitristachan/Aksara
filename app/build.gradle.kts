@@ -123,6 +123,7 @@ dependencies {
     ksp("com.google.dagger:dagger-compiler:2.48") // Dagger compiler
     ksp("com.google.dagger:hilt-compiler:2.48")   // Hilt compiler
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0-beta01")
+    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
 
     //LifeCycle SavedStates
 

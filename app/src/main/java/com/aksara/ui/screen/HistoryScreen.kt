@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aksara.R
-import com.aksara.room.ScanViewModel
+import com.aksara.hilt.room.ScanViewModel
 import com.aksara.ui.component.ScanCard
 
 @Composable

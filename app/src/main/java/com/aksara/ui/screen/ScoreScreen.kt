@@ -1,14 +1,12 @@
 package com.aksara.ui.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -51,7 +49,7 @@ fun ScoreScreen(
 
         LazyColumn {
             items(rulesItems, key = { it.id }) { item ->
-                RulesCard(item.text, item.id)
+                RulesCard("Rule ", item.text, item.id) {}
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

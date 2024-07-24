@@ -1,4 +1,4 @@
-package com.aksara.room
+package com.aksara.hilt.room
 
 import androidx.room.Dao
 import androidx.room.Insert

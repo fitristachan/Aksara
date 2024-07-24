@@ -63,8 +63,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.aksara.R
 import com.aksara.model.processImageAndPredict
-import com.aksara.room.ScanEntity
-import com.aksara.room.ScanViewModel
+import com.aksara.hilt.room.ScanEntity
+import com.aksara.hilt.room.ScanViewModel
 import com.aksara.ui.component.CameraPreview
 import com.aksara.ui.component.Loading
 import com.aksara.ui.component.dashedBorder

@@ -1,4 +1,4 @@
-package com.aksara.room
+package com.aksara.hilt.room
 
 import android.app.Application
 import android.content.Context
@@ -34,7 +34,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMyRepository(scanDatabase:ScanDatabase): ScanRepository {
+    fun provideMyRepository(scanDatabase: ScanDatabase): ScanRepository {
         return ScanRepositoryImpl(scanDatabase.dao)
     }
 }

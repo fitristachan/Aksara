@@ -1,5 +1,6 @@
-package com.aksara.retrofit
+package com.aksara.hilt.retrofit
 
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -8,5 +9,5 @@ interface ApiService {
     suspend fun getAnswer(
         @Query("context") context: String,
         @Query("question") question: String
-    ): QnaResponse
+    ): Flow<QnaResponse>
 }

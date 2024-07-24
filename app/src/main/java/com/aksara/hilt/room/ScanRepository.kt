@@ -1,4 +1,4 @@
-package com.aksara.room
+package com.aksara.hilt.room
 
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
@@ -9,8 +9,6 @@ interface ScanRepository {
     suspend fun addScan(scanEntity: ScanEntity): Long
     suspend fun getScanByScanId(scanId: Int): Flow<ScanEntity?>
     suspend fun getAllScans(): Flow<List<ScanEntity>>
-
-//    suspend fun getNewestScanId(): Int?
 }
 
 
@@ -33,10 +31,4 @@ class ScanRepositoryImpl @Inject constructor(
             scanDao.getAllScans()
         }
     }
-
-//    override suspend fun getNewestScanId(): Int? {
-//        return withContext(IO) {
-//            scanDao.getNewestScanId()
-//        }
-//    }
 }

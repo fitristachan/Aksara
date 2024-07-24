@@ -25,7 +25,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aksara.R
-import com.aksara.room.ScanViewModel
+import com.aksara.hilt.retrofit.QnaViewModel
+import com.aksara.hilt.room.ScanViewModel
 import com.aksara.ui.component.BottomBar
 import com.aksara.ui.component.TopBar
 import com.aksara.ui.navigation.AksaraScreen
@@ -132,7 +133,12 @@ fun AksaraApp(
                 )
             }
             composable(AksaraScreen.SelectContext.route) {
-                SelectContextScreen()
+                SelectContextScreen(
+                    navigateToQna = {
+                        val qnaRoute = AksaraScreen.Qna.createRoute(it)
+                        navController.navigate(qnaRoute)
+                    }
+                )
             }
 
             composable(
@@ -145,7 +151,7 @@ fun AksaraApp(
                     it.arguments?.getInt("scanId") ?: 0
                 QnaScreen(
                     contextId = contextId,
-//                    scanViewModel = hiltViewModel<ScanViewModel>()
+                    qnaViewModel = hiltViewModel<QnaViewModel>()
                 )
             }
 
