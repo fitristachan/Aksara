@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 fun RulesCard(
     title: String,
     ruleText: String,
-    ruleId: Int,
     onClick: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -42,7 +41,7 @@ fun RulesCard(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = title + ruleId,
+                    text = title,
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Justify,

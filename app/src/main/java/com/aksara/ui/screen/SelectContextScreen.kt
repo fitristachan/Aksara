@@ -46,7 +46,7 @@ fun SelectContextScreen(
 
         LazyColumn {
             items(contextItems, key = { it.id }) { item ->
-                RulesCard("Materi ", item.context, item.id, onClick = {
+                RulesCard(item.title, item.context, onClick = {
                     navigateToQna(item.id)
                 })
                 Spacer(modifier = Modifier.height(8.dp))

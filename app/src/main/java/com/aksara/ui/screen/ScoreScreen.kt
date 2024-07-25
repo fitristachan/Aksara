@@ -49,7 +49,7 @@ fun ScoreScreen(
 
         LazyColumn {
             items(rulesItems, key = { it.id }) { item ->
-                RulesCard("Rule ", item.text, item.id) {}
+                RulesCard("Rule ${item.id}", item.text) {}
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

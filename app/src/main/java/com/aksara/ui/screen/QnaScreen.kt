@@ -64,7 +64,6 @@ fun QnaScreen(
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 0.dp)
                 .background(MaterialTheme.colorScheme.onTertiary, RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
@@ -94,16 +93,18 @@ fun QnaScreen(
                 .wrapContentHeight()
                 .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
         ) {
-            contextItems.forEach { item ->
-                Text(
-                    text = item.id.toString(),
-                    fontWeight = FontWeight.Normal,
-                    textAlign = TextAlign.Justify,
-                    color = Color.White,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(16.dp)
-                )
+            Spacer(modifier = Modifier.size(8.dp))
+            contextItems.find { it.id == contextId }?.sample_question?.forEach { item ->
+                    Text(
+                        text = item,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Justify,
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                    )
             }
+            Spacer(modifier = Modifier.size(8.dp))
         }
 
         Spacer(modifier = Modifier.size(24.dp))
